@@ -86,6 +86,9 @@ h1 {
     padding: 30px;
     margin: 30px 0;
     border-left: 5px solid #667eea;
+    box-sizing: border-box;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 .question-number {
@@ -100,6 +103,8 @@ h1 {
     line-height: 1.6;
     margin-bottom: 20px;
     color: #333;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .question-category {
@@ -143,6 +148,10 @@ h1 {
     margin-top: 15px;
     border: 2px solid #667eea;
     animation: slideDown 0.3s ease;
+    box-sizing: border-box;
+    overflow-x: auto;
+    max-width: 100%;
+    width: 100%;
 }
 
 .hidden-content.show {
@@ -164,6 +173,10 @@ h1 {
     font-size: 1.1em;
     line-height: 1.6;
     color: #555;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    overflow-wrap: anywhere;
+    max-width: 100%;
 }
 
 .answer-text {
@@ -428,12 +441,23 @@ h1 {
         scrollbar-color: #ee5a6f #f1f1f1;
     }
 
+    .error-table::-webkit-scrollbar {
+        height: 8px;
+        -webkit-appearance: none;
+    }
+
+    .error-table::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+
     .error-table::-webkit-scrollbar-thumb {
-        background: #ee5a6f;
+        background: #ee5a6f !important;
+        border-radius: 10px;
     }
 
     .error-table::-webkit-scrollbar-thumb:hover {
-        background: #c44569;
+        background: #c44569 !important;
     }
 
     .scroll-indicator-left {
@@ -543,10 +567,16 @@ h1 {
     .answer-text,
     .explanation-text {
         font-size: 1em;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        overflow-wrap: anywhere;
     }
 
     .hidden-content {
         padding: 15px;
+        box-sizing: border-box;
+        overflow-x: auto;
+        max-width: 100%;
     }
 }
 
@@ -583,10 +613,32 @@ h1 {
 
     .question-block {
         padding: 15px;
+        box-sizing: border-box;
+        max-width: 100%;
+        overflow-x: hidden;
     }
 
     .question-text {
         font-size: 1em;
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .answer-text,
+    .explanation-text {
+        font-size: 0.95em;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        overflow-wrap: anywhere;
+        max-width: 100%;
+    }
+
+    .hidden-content {
+        padding: 12px;
+        box-sizing: border-box;
+        overflow-x: auto;
+        max-width: 100%;
+        width: 100%;
     }
 
     .results-table {
