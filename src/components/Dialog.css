@@ -1,0 +1,169 @@
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.dialog-container {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
+  width: 100%;
+  padding: 30px;
+  animation: slideUp 0.3s ease-out;
+  position: relative;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.dialog-title {
+  color: #667eea;
+  margin: 0 0 15px 0;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.dialog-message {
+  color: #333;
+  font-size: 1.1em;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  word-wrap: break-word;
+}
+
+.dialog-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.dialog-btn {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  white-space: nowrap;
+  min-width: 120px;
+}
+
+.dialog-btn-confirm {
+  background: #667eea;
+  color: white;
+  box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+}
+
+.dialog-btn-confirm:hover {
+  background: #5568d3;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.dialog-btn-confirm:active {
+  transform: translateY(0);
+}
+
+.dialog-btn-cancel {
+  background: #6c757d;
+  color: white;
+  box-shadow: 0 3px 10px rgba(108, 117, 125, 0.3);
+}
+
+.dialog-btn-cancel:hover {
+  background: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(108, 117, 125, 0.4);
+}
+
+.dialog-btn-cancel:active {
+  transform: translateY(0);
+}
+
+/* Мобильная адаптивность */
+@media (max-width: 768px) {
+  .dialog-overlay {
+    padding: 15px;
+  }
+
+  .dialog-container {
+    padding: 25px 20px;
+    border-radius: 12px;
+    max-width: 100%;
+  }
+
+  .dialog-title {
+    font-size: 1.3em;
+    margin-bottom: 12px;
+  }
+
+  .dialog-message {
+    font-size: 1em;
+    margin-bottom: 20px;
+  }
+
+  .dialog-buttons {
+    gap: 10px;
+  }
+
+  .dialog-btn {
+    width: 100%;
+    min-width: auto;
+    padding: 14px 20px;
+    font-size: 0.95em;
+  }
+}
+
+@media (max-width: 480px) {
+  .dialog-overlay {
+    padding: 10px;
+  }
+
+  .dialog-container {
+    padding: 20px 15px;
+  }
+
+  .dialog-title {
+    font-size: 1.2em;
+  }
+
+  .dialog-message {
+    font-size: 0.95em;
+  }
+
+  .dialog-btn {
+    padding: 12px 18px;
+    font-size: 0.9em;
+  }
+}
+

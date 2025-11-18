@@ -3,7 +3,7 @@ import { QuestionManager } from '../utils/questionManager'
 function TopicsSelection({ topics, selectedTopics, allQuestionsByTopic, onTopicToggle, totalQuestions }) {
   return (
     <div id="topicsSelection" style={{ marginTop: '30px', padding: '20px', background: '#f8f9fa', borderRadius: '15px' }}>
-      <h3 style={{ textAlign: 'center', color: '#667eea', marginBottom: '20px' }}>
+      <h3 style={{ textAlign: 'center', color: '#667eea', marginBottom: '20px', fontSize: '1.2em' }}>
         Выберите темы для практики
       </h3>
       <div id="topicsCheckboxes" style={{ 

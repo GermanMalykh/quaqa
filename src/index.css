@@ -305,39 +305,393 @@ h1 {
     transform: translateY(0);
 }
 
+@media (min-width: 769px) {
+    .header-load-buttons {
+        display: none !important;
+    }
+
+    .desktop-load-buttons {
+        display: flex !important;
+    }
+}
+
 @media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
     .container {
-        padding: 20px;
+        padding: 15px;
+        border-radius: 15px;
     }
 
     h1 {
-        font-size: 1.8em;
+        font-size: 1.5em;
+        margin-bottom: 20px;
+        padding-right: 0;
+    }
+
+    .stats {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .stat-box-total-time {
+        order: 1;
+    }
+
+    .stat-box-question {
+        order: 2;
+    }
+
+    .stat-box-question-time {
+        order: 3;
+    }
+
+    .stat-box {
+        min-width: auto;
+        width: 100%;
+        padding: 15px;
+    }
+
+    .stat-box .value {
+        font-size: 1.5em;
     }
 
     .timer {
         font-size: 2em;
+        margin: 20px 0;
+    }
+
+    .question-block {
+        padding: 20px;
+        margin: 20px 0;
     }
 
     .question-text {
         font-size: 1.1em;
+        line-height: 1.5;
+    }
+
+    .question-number {
+        font-size: 1em;
+    }
+
+    .toggle-button {
+        width: 100%;
+        margin: 5px 0;
+        padding: 12px 20px;
+        font-size: 0.95em;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 12px 20px;
+        font-size: 1em;
+    }
+
+    .controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .results {
+        padding: 20px 10px;
+        position: relative;
+    }
+
+    .scrollable-table-container {
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .scrollable-table-container::-webkit-scrollbar {
+        height: 8px;
+        -webkit-appearance: none;
+    }
+
+    .scrollable-table-container::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+
+    .scrollable-table-container::-webkit-scrollbar-thumb {
+        background: #667eea;
+        border-radius: 10px;
+    }
+
+    .scrollable-table-container::-webkit-scrollbar-thumb:hover {
+        background: #5568d3;
+    }
+
+    .error-table {
+        scrollbar-color: #ee5a6f #f1f1f1;
+    }
+
+    .error-table::-webkit-scrollbar-thumb {
+        background: #ee5a6f;
+    }
+
+    .error-table::-webkit-scrollbar-thumb:hover {
+        background: #c44569;
+    }
+
+    .scroll-indicator-left {
+        color: #667eea !important;
+    }
+
+    .error-table .scroll-indicator-left,
+    .error-table .scroll-indicator-right {
+        color: #ee5a6f !important;
+    }
+
+    .results-table {
+        font-size: 0.85em;
+        min-width: 500px;
+        width: 100%;
+    }
+
+    .results-table th {
+        padding: 8px 6px;
+        white-space: nowrap;
+    }
+
+    .results-table td {
+        padding: 8px 6px;
+        word-break: break-word;
+    }
+
+    .results-table th:nth-child(1),
+    .results-table td:nth-child(1) {
+        min-width: 40px;
+        text-align: center;
+    }
+
+    .results-table th:nth-child(2),
+    .results-table td:nth-child(2) {
+        min-width: 100px;
+    }
+
+    .results-table th:nth-child(3),
+    .results-table td:nth-child(3) {
+        min-width: 200px;
+        max-width: 300px;
+    }
+
+    .results-table th:nth-child(4),
+    .results-table td:nth-child(4) {
+        min-width: 80px;
+        text-align: center;
+    }
+
+    #topicsSelection {
+        padding: 15px;
+        margin-top: 20px;
+    }
+
+    #topicsSelection h3 {
+        font-size: 1.1em;
+        margin-bottom: 15px;
     }
 
     #topicsCheckboxes {
         grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    #selectedTopicsInfo {
+        font-size: 0.95em;
+        padding: 0 10px;
     }
 
     #restartBtn,
-    #loadFileBtnTop {
+    #loadFileBtnTop,
+    #clearDataBtn {
         width: 100%;
-        margin-top: 0;
+        margin-top: 10px;
+        padding: 12px 15px;
+        font-size: 0.9em;
+    }
+
+    .header-load-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .header-load-buttons > button {
+        width: 100%;
     }
     
-    div[style*="position: absolute"][style*="top: 0"][style*="right: 0"] {
+    .header-buttons {
         position: relative !important;
         top: auto !important;
         right: auto !important;
         margin-top: 15px;
         width: 100%;
+        flex-direction: column;
+    }
+
+    .desktop-load-buttons {
+        display: none !important;
+    }
+
+    .time-info {
+        font-size: 0.85em;
+        padding: 0 10px;
+    }
+
+    .answer-text,
+    .explanation-text {
+        font-size: 1em;
+    }
+
+    .hidden-content {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 5px;
+    }
+
+    .container {
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    h1 {
+        font-size: 1.3em;
+        margin-bottom: 15px;
+    }
+
+    .stat-box {
+        padding: 12px;
+    }
+
+    .stat-box h3 {
+        font-size: 0.8em;
+    }
+
+    .stat-box .value {
+        font-size: 1.3em;
+    }
+
+    .timer {
+        font-size: 1.5em;
+    }
+
+    .question-block {
+        padding: 15px;
+    }
+
+    .question-text {
+        font-size: 1em;
+    }
+
+    .results-table {
+        font-size: 0.75em;
+        min-width: 450px;
+    }
+
+    .results-table th {
+        padding: 6px 4px;
+        font-size: 0.9em;
+    }
+
+    .results-table td {
+        padding: 6px 4px;
+        font-size: 0.9em;
+    }
+
+    .results-table th:nth-child(1),
+    .results-table td:nth-child(1) {
+        min-width: 35px;
+    }
+
+    .results-table th:nth-child(2),
+    .results-table td:nth-child(2) {
+        min-width: 80px;
+    }
+
+    .results-table th:nth-child(3),
+    .results-table td:nth-child(3) {
+        min-width: 150px;
+        max-width: 250px;
+    }
+
+    .results-table th:nth-child(4),
+    .results-table td:nth-child(4) {
+        min-width: 70px;
+    }
+
+    #topicsSelection {
+        padding: 10px;
+    }
+
+    #formatExample {
+        padding: 15px 10px;
+        margin-top: 20px;
+    }
+
+    #formatExample h3 {
+        font-size: 1.1em;
+    }
+
+    .format-example-table {
+        margin-top: 10px;
+        margin-bottom: 15px;
+    }
+
+    #formatExample table {
+        font-size: 0.75em;
+        min-width: 450px;
+    }
+
+    #formatExample th {
+        padding: 6px 4px;
+        font-size: 0.9em;
+        white-space: nowrap;
+    }
+
+    #formatExample td {
+        padding: 6px 4px;
+        font-size: 0.9em;
+        word-break: break-word;
+    }
+
+    #formatExample th:nth-child(1) {
+        min-width: 60px;
+    }
+
+    #formatExample th:nth-child(3),
+    #formatExample td:nth-child(3),
+    #formatExample th:nth-child(4),
+    #formatExample td:nth-child(4) {
+        max-width: 120px;
+    }
+
+    #errorStatus table {
+        font-size: 0.75em;
+        min-width: 450px;
+    }
+
+    #errorStatus th {
+        white-space: nowrap;
+        padding: 6px 4px !important;
+    }
+
+    #errorStatus td {
+        word-break: break-word;
+        padding: 6px 4px !important;
+    }
+
+
+    #formatExample th:nth-child(3),
+    #formatExample td:nth-child(3),
+    #formatExample th:nth-child(4),
+    #formatExample td:nth-child(4) {
+        max-width: 150px;
     }
 }
 

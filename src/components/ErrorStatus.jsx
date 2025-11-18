@@ -1,3 +1,5 @@
+import ScrollableTable from './ScrollableTable'
+
 function ErrorStatus({ error }) {
   if (!error) return null
 
@@ -13,20 +15,22 @@ function ErrorStatus({ error }) {
         </p>
         <div style={{ textAlign: 'left', background: 'white', padding: '15px', borderRadius: '8px', marginTop: '15px' }}>
           <p style={{ marginBottom: '10px', fontWeight: 'bold' }}>Требуемый формат столбцов:</p>
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9em' }}>
-            <tr style={{ background: '#f8f9fa' }}>
-              <th style={{ padding: '8px', border: '1px solid #ddd', textAlign: 'left' }}>Номер</th>
-              <th style={{ padding: '8px', border: '1px solid #ddd', textAlign: 'left' }}>Вопрос</th>
-              <th style={{ padding: '8px', border: '1px solid #ddd', textAlign: 'left' }}>Ответ</th>
-              <th style={{ padding: '8px', border: '1px solid #ddd', textAlign: 'left' }}>Объяснение</th>
-            </tr>
-            <tr>
-              <td style={{ padding: '8px', border: '1px solid #ddd' }}>1</td>
-              <td style={{ padding: '8px', border: '1px solid #ddd' }}>Как получить текущий URL?</td>
-              <td style={{ padding: '8px', border: '1px solid #ddd' }}>driver.getCurrentUrl()</td>
-              <td style={{ padding: '8px', border: '1px solid #ddd' }}>Метод возвращает URL...</td>
-            </tr>
-          </table>
+          <ScrollableTable className="error-table" style={{ marginTop: '10px', marginBottom: '15px' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9em', minWidth: '500px' }}>
+              <tr style={{ background: '#f8f9fa' }}>
+                <th style={{ padding: '8px', border: '1px solid #ddd', textAlign: 'left', whiteSpace: 'nowrap' }}>Номер</th>
+                <th style={{ padding: '8px', border: '1px solid #ddd', textAlign: 'left', whiteSpace: 'nowrap' }}>Вопрос</th>
+                <th style={{ padding: '8px', border: '1px solid #ddd', textAlign: 'left', whiteSpace: 'nowrap' }}>Ответ</th>
+                <th style={{ padding: '8px', border: '1px solid #ddd', textAlign: 'left', whiteSpace: 'nowrap' }}>Объяснение</th>
+              </tr>
+              <tr>
+                <td style={{ padding: '8px', border: '1px solid #ddd' }}>1</td>
+                <td style={{ padding: '8px', border: '1px solid #ddd' }}>Как получить текущий URL?</td>
+                <td style={{ padding: '8px', border: '1px solid #ddd' }}>driver.getCurrentUrl()</td>
+                <td style={{ padding: '8px', border: '1px solid #ddd' }}>Метод возвращает URL...</td>
+              </tr>
+            </table>
+          </ScrollableTable>
           <p style={{ marginTop: '15px', fontSize: '0.9em', color: '#666' }}>
             Примечание: Названия столбцов могут быть на русском или английском языке
           </p>

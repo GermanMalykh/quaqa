@@ -4,7 +4,6 @@ import { XLSXLoader } from './utils/xlsxLoader'
 import { QuestionManager } from './utils/questionManager'
 import { formatTime } from './utils/timer'
 import StatsBlock from './components/StatsBlock'
-import TimerDisplay from './components/TimerDisplay'
 import QuestionBlock from './components/QuestionBlock'
 import TopicsSelection from './components/TopicsSelection'
 import LoadingStatus from './components/LoadingStatus'
@@ -12,6 +11,7 @@ import ErrorStatus from './components/ErrorStatus'
 import Results from './components/Results'
 import FormatExample from './components/FormatExample'
 import Header from './components/Header'
+import Dialog from './components/Dialog'
 
 function App() {
   const [allQuestionsByTopic, setAllQuestionsByTopic] = useState({})
@@ -36,6 +36,16 @@ function App() {
   const [error, setError] = useState(null)
   const [sheetStats, setSheetStats] = useState([])
   const [showFormatExample, setShowFormatExample] = useState(true)
+  
+  // Состояние для диалогов
+  const [dialog, setDialog] = useState({
+    isOpen: false,
+    type: 'alert',
+    title: '',
+    message: '',
+    onConfirm: null,
+    onCancel: null
+  })
 
   // Загрузка данных при монтировании
   useEffect(() => {
@@ -150,7 +160,13 @@ function App() {
 
   const handleStartPractice = useCallback(() => {
     if (questions.length === 0) {
-      alert('Выберите хотя бы одну тему для практики!')
+      setDialog({
+        isOpen: true,
+        type: 'alert',
+        title: 'Внимание',
+        message: 'Выберите хотя бы одну тему для практики!',
+        onConfirm: () => setDialog(prev => ({ ...prev, isOpen: false }))
+      })
       return
     }
     
@@ -224,11 +240,45 @@ function App() {
     setShowExplanation(prev => !prev)
   }, [])
 
+  const handleClearData = useCallback(() => {
+    setDialog({
+      isOpen: true,
+      type: 'confirm',
+      title: 'Подтверждение',
+      message: 'Вы уверены, что хотите очистить все сохраненные данные? Это действие нельзя отменить.',
+      onConfirm: () => {
+        // Очищаем localStorage
+        localStorage.removeItem(Storage.STORAGE_KEY)
+        localStorage.removeItem(Storage.CHECKBOXES_KEY)
+        
+        // Сбрасываем состояние
+        setAllQuestionsByTopic({})
+        setSelectedTopics([])
+        setQuestions([])
+        setSheetStats([])
+        setError(null)
+        setLoadingStatus({ show: true, message: 'Загрузите XLSX файл с вопросами', isError: false })
+        setShowFormatExample(true)
+        
+        // Закрываем диалог подтверждения и показываем сообщение об успешной очистке
+        setDialog({
+          isOpen: true,
+          type: 'alert',
+          title: 'Успешно',
+          message: 'Данные успешно очищены',
+          onConfirm: () => setDialog(prev => ({ ...prev, isOpen: false }))
+        })
+      },
+      onCancel: () => setDialog(prev => ({ ...prev, isOpen: false }))
+    })
+  }, [])
+
   return (
     <div className="container">
       <Header 
         onReset={handleReset}
         onLoadFile={() => document.getElementById('xlsxFileInput')?.click()}
+        onClearData={handleClearData}
         showReset={isPracticeStarted && !isPracticeFinished}
         showLoadFile={Object.keys(allQuestionsByTopic).length > 0 && !isPracticeStarted && !isPracticeFinished}
       />
@@ -252,7 +302,6 @@ function App() {
             totalTime={totalSeconds}
             questionTime={questionSeconds}
           />
-          <TimerDisplay seconds={totalSeconds} />
           {currentQuestion && (
             <QuestionBlock
               question={currentQuestion}
@@ -272,13 +321,36 @@ function App() {
       {!isPracticeStarted && !isPracticeFinished && (
         <>
           {Object.keys(allQuestionsByTopic).length > 0 && (
-            <TopicsSelection
-              topics={Object.keys(allQuestionsByTopic)}
-              selectedTopics={selectedTopics}
-              allQuestionsByTopic={allQuestionsByTopic}
-              onTopicToggle={handleTopicToggle}
-              totalQuestions={questions.length}
-            />
+            <>
+              <div className="desktop-load-buttons" style={{ display: 'flex', gap: '15px', justifyContent: 'flex-end', marginTop: '20px', marginBottom: '20px' }}>
+                <button
+                  onClick={() => document.getElementById('xlsxFileInput')?.click()}
+                  className="btn btn-primary"
+                  style={{ padding: '12px 25px', fontSize: '1em' }}
+                >
+                  📁 Загрузить XLSX
+                </button>
+                <button
+                  onClick={handleClearData}
+                  className="btn"
+                  style={{ 
+                    padding: '12px 25px', 
+                    fontSize: '1em',
+                    background: '#6c757d',
+                    color: 'white'
+                  }}
+                >
+                  🗑️ Сброс данных
+                </button>
+              </div>
+              <TopicsSelection
+                topics={Object.keys(allQuestionsByTopic)}
+                selectedTopics={selectedTopics}
+                allQuestionsByTopic={allQuestionsByTopic}
+                onTopicToggle={handleTopicToggle}
+                totalQuestions={questions.length}
+              />
+            </>
           )}
           
           <div className="controls">
@@ -324,6 +396,15 @@ function App() {
       )}
 
       {!isPracticeStarted && !isPracticeFinished && showFormatExample && <FormatExample />}
+      
+      <Dialog
+        isOpen={dialog.isOpen}
+        type={dialog.type}
+        title={dialog.title}
+        message={dialog.message}
+        onConfirm={dialog.onConfirm}
+        onCancel={dialog.onCancel}
+      />
     </div>
   )
 }

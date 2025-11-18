@@ -18,15 +18,15 @@ function StatsBlock({ currentQuestion, totalQuestions, totalTime, questionTime }
 
   return (
     <div className="stats">
-      <div className="stat-box">
-        <h3>Вопрос</h3>
-        <div className="value">{currentQuestion}/{totalQuestions}</div>
-      </div>
-      <div className="stat-box">
+      <div className="stat-box stat-box-total-time">
         <h3>Общее время</h3>
         <div className="value">{formatTime(totalTime)}</div>
       </div>
-      <div className="stat-box" style={{ background: getQuestionTimeColor() }}>
+      <div className="stat-box stat-box-question">
+        <h3>Вопрос</h3>
+        <div className="value">{currentQuestion}/{totalQuestions}</div>
+      </div>
+      <div className="stat-box stat-box-question-time" style={{ background: getQuestionTimeColor() }}>
         <h3>Время на вопрос</h3>
         <div className="value">{displayQuestionTime}</div>
       </div>
