@@ -16,23 +16,33 @@ export function usePracticeFlow(): UsePracticeFlowReturn {
     nextQuestion: nextQuestionAction,
     addAnsweredQuestion,
     currentQuestionIndex,
+    practiceQuestions,
     usedQuestionIndices,
     questionStartTime,
     currentQuestion
   } = usePractice()
   
-  const { questions } = useQuestions()
+  const { allQuestionsByTopic, selectedTopics } = useQuestions()
 
   const start = useCallback(() => {
+    if (selectedTopics.length === 0) {
+      throw new Error('Выберите хотя бы одну тему для практики!')
+    }
+    
+    // Пересоздаем список вопросов при каждом старте практики,
+    // чтобы каждый раз выбирались новые случайные вопросы
+    const result = QuestionManager.updateSelectedQuestions(allQuestionsByTopic, selectedTopics)
+    const questions = result.questions
+    
     if (questions.length === 0) {
       throw new Error('Выберите хотя бы одну тему для практики!')
     }
     
-    const result = QuestionManager.getRandomQuestion(questions, [])
-    if (result.question) {
-      startPractice(result.question, result.usedIndices)
+    const randomResult = QuestionManager.getRandomQuestion(questions, [])
+    if (randomResult.question) {
+      startPractice(randomResult.question, questions, randomResult.usedIndices)
     }
-  }, [questions, startPractice])
+  }, [allQuestionsByTopic, selectedTopics, startPractice])
 
   const next = useCallback(() => {
     if (!questionStartTime || !currentQuestion) return
@@ -45,6 +55,9 @@ export function usePracticeFlow(): UsePracticeFlowReturn {
       time: actualTimeSpent
     }
     
+    // Используем список вопросов, выбранный при старте практики
+    const questions = practiceQuestions
+    
     // Сохраняем текущий ответ перед проверкой на завершение
     const nextIndex = currentQuestionIndex + 1
     if (nextIndex >= questions.length) {
@@ -54,15 +67,15 @@ export function usePracticeFlow(): UsePracticeFlowReturn {
       return
     }
     
-    const result = QuestionManager.getRandomQuestion(questions, usedQuestionIndices)
-    if (result.question) {
-      nextQuestionAction(result.question, result.usedIndices, answeredQuestion)
+    const randomResult = QuestionManager.getRandomQuestion(questions, usedQuestionIndices)
+    if (randomResult.question) {
+      nextQuestionAction(randomResult.question, randomResult.usedIndices, answeredQuestion)
     }
   }, [
     questionStartTime, 
     currentQuestion, 
     currentQuestionIndex, 
-    questions, 
+    practiceQuestions,
     usedQuestionIndices,
     finishPractice,
     nextQuestionAction,

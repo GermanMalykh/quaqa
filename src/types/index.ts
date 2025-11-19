@@ -79,6 +79,7 @@ export interface PracticeContextValue {
   isPracticeFinished: boolean
   currentQuestionIndex: number
   currentQuestion: Question | null
+  practiceQuestions: Question[]
   usedQuestionIndices: number[]
   answeredQuestions: AnsweredQuestion[]
   showAnswer: boolean
@@ -86,7 +87,7 @@ export interface PracticeContextValue {
   practiceStartTime: number | null
   questionStartTime: number | null
   // Actions
-  startPractice: (firstQuestion: Question, usedIndices: number[]) => void
+  startPractice: (firstQuestion: Question, questions: Question[], usedIndices: number[]) => void
   finishPractice: () => void
   resetPractice: () => void
   nextQuestion: (nextQuestion: Question, usedIndices: number[], answeredQuestion: AnsweredQuestion) => void

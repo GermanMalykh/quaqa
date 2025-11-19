@@ -24,9 +24,22 @@ export interface RandomQuestionResult {
 export const QuestionManager = {
   /**
    * Получает случайные элементы из массива
+   * Использует алгоритм Fisher-Yates для равномерного распределения
    */
   getRandomItems<T>(array: T[], count: number): T[] {
-    const shuffled = [...array].sort(() => 0.5 - Math.random())
+    if (array.length === 0 || count <= 0) {
+      return []
+    }
+    
+    // Создаем копию массива
+    const shuffled = [...array]
+    
+    // Алгоритм Fisher-Yates для равномерного перемешивания
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+    }
+    
     return shuffled.slice(0, Math.min(count, shuffled.length))
   },
   

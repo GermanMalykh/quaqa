@@ -12,6 +12,7 @@ export function PracticeProvider({ children }: PracticeProviderProps) {
   const [isPracticeFinished, setIsPracticeFinished] = useState(false)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null)
+  const [practiceQuestions, setPracticeQuestions] = useState<Question[]>([])
   const [usedQuestionIndices, setUsedQuestionIndices] = useState<number[]>([])
   const [answeredQuestions, setAnsweredQuestions] = useState<AnsweredQuestion[]>([])
   const [showAnswer, setShowAnswer] = useState(false)
@@ -19,12 +20,13 @@ export function PracticeProvider({ children }: PracticeProviderProps) {
   const [practiceStartTime, setPracticeStartTime] = useState<number | null>(null)
   const [questionStartTime, setQuestionStartTime] = useState<number | null>(null)
 
-  const startPractice = useCallback((firstQuestion: Question, usedIndices: number[]) => {
+  const startPractice = useCallback((firstQuestion: Question, questions: Question[], usedIndices: number[]) => {
     setIsPracticeStarted(true)
     setIsPracticeFinished(false)
     setPracticeStartTime(Date.now())
     setCurrentQuestionIndex(0)
     setAnsweredQuestions([])
+    setPracticeQuestions(questions)
     setUsedQuestionIndices(usedIndices)
     setCurrentQuestion(firstQuestion)
     setQuestionStartTime(Date.now())
@@ -42,6 +44,7 @@ export function PracticeProvider({ children }: PracticeProviderProps) {
     setIsPracticeFinished(false)
     setCurrentQuestionIndex(0)
     setCurrentQuestion(null)
+    setPracticeQuestions([])
     setAnsweredQuestions([])
     setUsedQuestionIndices([])
     setQuestionStartTime(null)
@@ -82,6 +85,7 @@ export function PracticeProvider({ children }: PracticeProviderProps) {
     isPracticeFinished,
     currentQuestionIndex,
     currentQuestion,
+    practiceQuestions,
     usedQuestionIndices,
     answeredQuestions,
     showAnswer,
