@@ -3,19 +3,49 @@ import react from '@vitejs/plugin-react'
 import path from 'path'
 import { readFileSync, writeFileSync, copyFileSync } from 'fs'
 
-// Плагин для копирования index.html в 404.html для GitHub Pages
-const copy404Plugin = () => {
+// Плагин для обновления путей для GitHub Pages
+const updatePathsPlugin = () => {
   return {
-    name: 'copy-404',
+    name: 'update-paths',
     closeBundle() {
       if (process.env.NODE_ENV === 'production') {
         try {
           const indexPath = path.resolve(__dirname, 'dist/index.html')
-          const notFoundPath = path.resolve(__dirname, 'dist/404.html')
-          copyFileSync(indexPath, notFoundPath)
-          console.log('✅ 404.html создан для GitHub Pages')
+          
+          // Читаем index.html
+          let indexContent = readFileSync(indexPath, 'utf-8')
+          
+          // Обновляем пути к иконкам и manifest в index.html (если они еще не обновлены)
+          indexContent = indexContent.replace(
+            /href="\/icon-/g,
+            'href="/quaqa/icon-'
+          )
+          indexContent = indexContent.replace(
+            /href="\/apple-touch-icon/g,
+            'href="/quaqa/apple-touch-icon'
+          )
+          indexContent = indexContent.replace(
+            /href="\/manifest\.json/g,
+            'href="/quaqa/manifest.json'
+          )
+          
+          // Сохраняем обновленный index.html
+          writeFileSync(indexPath, indexContent)
+          
+          // Обновляем manifest.json для production с правильными путями
+          const manifestPath = path.resolve(__dirname, 'dist/manifest.json')
+          const manifestContent = readFileSync(manifestPath, 'utf-8')
+          const manifest = JSON.parse(manifestContent)
+          manifest.start_url = '/quaqa/'
+          manifest.icons = manifest.icons.map((icon) => ({
+            ...icon,
+            src: icon.src.replace(/^\//, '/quaqa/')
+          }))
+          writeFileSync(manifestPath, JSON.stringify(manifest, null, 2))
+          console.log('✅ manifest.json обновлен для GitHub Pages')
+          console.log('✅ index.html обновлен с правильными путями для GitHub Pages')
         } catch (error) {
-          console.warn('⚠️ Не удалось создать 404.html:', error)
+          console.warn('⚠️ Не удалось обновить пути:', error)
         }
       }
     },
@@ -24,7 +54,7 @@ const copy404Plugin = () => {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), copy404Plugin()],
+  plugins: [react(), updatePathsPlugin()],
   // Для GitHub Pages - замените '/quaqa/' на имя вашего репозитория
   // Если репозиторий называется 'username.github.io', используйте '/'
   base: process.env.NODE_ENV === 'production' ? '/quaqa/' : '/',
