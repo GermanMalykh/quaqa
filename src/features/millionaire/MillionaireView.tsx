@@ -113,6 +113,7 @@ export default function MillionaireView() {
     )
     if (confirmed) {
       resetGame()
+      // Перезагружаем страницу для сброса состояния
       window.location.reload()
     }
   }

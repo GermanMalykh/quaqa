@@ -1,10 +1,30 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
+import { readFileSync, writeFileSync, copyFileSync } from 'fs'
+
+// Плагин для копирования index.html в 404.html для GitHub Pages
+const copy404Plugin = () => {
+  return {
+    name: 'copy-404',
+    closeBundle() {
+      if (process.env.NODE_ENV === 'production') {
+        try {
+          const indexPath = path.resolve(__dirname, 'dist/index.html')
+          const notFoundPath = path.resolve(__dirname, 'dist/404.html')
+          copyFileSync(indexPath, notFoundPath)
+          console.log('✅ 404.html создан для GitHub Pages')
+        } catch (error) {
+          console.warn('⚠️ Не удалось создать 404.html:', error)
+        }
+      }
+    },
+  }
+}
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), copy404Plugin()],
   // Для GitHub Pages - замените '/quaqa/' на имя вашего репозитория
   // Если репозиторий называется 'username.github.io', используйте '/'
   base: process.env.NODE_ENV === 'production' ? '/quaqa/' : '/',

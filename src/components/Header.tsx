@@ -60,30 +60,7 @@ function Header({ onReset, onLoadFile, onClearData, showReset, showLoadFile, hid
           </button>
         </div>
       )}
-      {/* Кнопка "Начать заново" для практики - справа вверху */}
-      {!isMillionairePage && showReset && (
-        <div className="header-buttons" style={{ position: 'absolute', top: 0, right: 0, display: 'flex', gap: '10px', flexDirection: 'column', alignItems: 'flex-end' }}>
-          <button
-            id="restartBtn"
-            onClick={onReset}
-            style={{
-              padding: '10px 20px',
-              background: '#ff6b6b',
-              color: 'white',
-              border: 'none',
-              borderRadius: '8px',
-              cursor: 'pointer',
-              fontSize: '0.9em',
-              fontWeight: 'bold',
-              boxShadow: '0 3px 10px rgba(255, 107, 107, 0.3)',
-              transition: 'all 0.3s',
-              whiteSpace: 'nowrap'
-            }}
-          >
-            ↻ Начать заново
-          </button>
-        </div>
-      )}
+      {/* Кнопка "Начать заново" для практики больше не показывается здесь - она в PracticeView */}
     </div>
   )
 }

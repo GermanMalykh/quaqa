@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { HashRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
 import { PracticeProvider } from './contexts/PracticeContext'
 import { QuestionsProvider } from './contexts/QuestionsContext'
@@ -35,7 +35,7 @@ function AppContent() {
   const { dialog, showConfirm, showAlert } = useDialog()
 
   return (
-    <BrowserRouter basename={import.meta.env.PROD ? '/quaqa' : '/'}>
+    <HashRouter>
       <AppRouterContent 
         allQuestionsByTopic={allQuestionsByTopic}
         clearData={clearData}
@@ -47,7 +47,7 @@ function AppContent() {
         showAlert={showAlert}
         dialog={dialog}
       />
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
@@ -89,7 +89,7 @@ function AppRouterContent({
       if (confirmed) {
         MillionaireLoader.clearStorage()
         await showAlert('Успешно', 'Данные миллионера успешно очищены')
-        // Перезагружаем страницу для обновления состояния
+        // Перезагружаем страницу для полного сброса состояния
         window.location.reload()
       }
     } else {
