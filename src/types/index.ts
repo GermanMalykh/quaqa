@@ -140,6 +140,7 @@ export interface MillionaireQuestion {
   answers: MillionaireAnswer[]
   difficulty: 1 | 2 | 3 | 4
   explanation?: string
+  topic?: string
 }
 
 export interface Lifeline {

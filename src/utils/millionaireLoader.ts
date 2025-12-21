@@ -50,6 +50,7 @@ export const MillionaireLoader = {
             const answerD = String(row.answer_d || row['answer_d'] || '').trim()
             const correctAnswer = String(row.correct_answer || row['correct_answer'] || '').toUpperCase().trim()
             const explanation = String(row.explanation || row['explanation'] || row.Explanation || '').trim()
+            const topic = String(row.topic || row['topic'] || row.Topic || '').trim()
             
             // Отладка для первого вопроса
             if (index === 0) {
@@ -100,7 +101,8 @@ export const MillionaireLoader = {
               text: question,
               answers: answers,
               difficulty: difficulty,
-              explanation: explanation && explanation.length > 0 ? explanation : undefined
+              explanation: explanation && explanation.length > 0 ? explanation : undefined,
+              topic: topic && topic.length > 0 ? topic : undefined
             }
             
             // Отладка для первого вопроса

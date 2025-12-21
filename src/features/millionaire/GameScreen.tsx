@@ -230,8 +230,22 @@ export default function GameScreen({ game, onStateChange, onReset }: GameScreenP
 
           {/* Вопрос */}
           <div>
-            <div className="millionaire-question-number">
-              Вопрос <strong>{currentLevel + 1}</strong> из 15
+            <div 
+              className="millionaire-question-number" 
+              style={{ 
+                display: 'flex', 
+                justifyContent: question.topic ? 'space-between' : 'center', 
+                alignItems: 'center' 
+              }}
+            >
+              {question.topic && (
+                <span style={{ color: '#667eea', fontWeight: 'bold' }}>
+                  Тема: {question.topic}
+                </span>
+              )}
+              <span>
+                Вопрос <strong>{currentLevel + 1}</strong> из 15
+              </span>
             </div>
             <div className="millionaire-question-text">{question.text}</div>
 
