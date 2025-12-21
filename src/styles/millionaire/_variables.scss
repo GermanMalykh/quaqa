@@ -1,0 +1,51 @@
+// Цвета
+$primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+$primary-color: #667eea;
+$primary-dark: #764ba2;
+$secondary-color: #4caf50;
+$error-color: #f44336;
+$warning-color: #ff9800;
+$text-color: #333;
+$text-light: #666;
+$text-white: #fff;
+$bg-white: #fff;
+$bg-light: #f0f0f0;
+$bg-light-blue: #e3f2fd;
+$border-color: #ccc;
+
+// Размеры
+$container-max-width: 900px;
+$border-radius: 20px;
+$border-radius-small: 10px;
+$border-radius-button: 10px;
+
+// Отступы
+$spacing-xs: 10px;
+$spacing-sm: 15px;
+$spacing-md: 20px;
+$spacing-lg: 30px;
+$spacing-xl: 40px;
+
+// Тени
+$shadow-sm: 0 5px 15px rgb(102 126 234 / 20%);
+$shadow-md: 0 5px 20px rgb(102 126 234 / 40%);
+$shadow-lg: 0 10px 40px rgb(0 0 0 / 20%);
+$shadow-text: 2px 2px 4px rgb(0 0 0 / 30%);
+
+// Шрифты
+$font-family: 'Segoe UI', tahoma, geneva, verdana, sans-serif;
+$font-size-xs: 1.1em;
+$font-size-sm: 1.2em;
+$font-size-md: 1.3em;
+$font-size-lg: 1.8em;
+$font-size-xl: 2em;
+$font-size-xxl: 2.5em;
+$font-size-xxxl: 3em;
+
+// Переходы
+$transition-fast: 0.3s;
+$transition-normal: 0.5s;
+
+// Breakpoints
+$breakpoint-mobile: 768px;
+

@@ -1,0 +1,311 @@
+@use './variables' as *;
+@use './mixins' as *;
+@use './animations';
+
+// Start Screen
+.millionaire-start-content {
+  text-align: center;
+
+  h2 {
+    font-size: $font-size-xl;
+    margin-bottom: $spacing-md;
+    color: $primary-color;
+  }
+
+  p {
+    font-size: $font-size-sm;
+    margin-bottom: $spacing-lg;
+    color: $text-light;
+  }
+}
+
+// Buttons
+.millionaire-btn {
+  @include button-base;
+
+  &-primary {
+    background: $primary-gradient;
+    color: $text-white;
+
+    @include hover-scale;
+  }
+}
+
+// Game Header
+.millionaire-game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: $spacing-lg;
+  flex-wrap: wrap;
+  gap: $spacing-md;
+}
+
+// Prize Levels
+.millionaire-prize-levels {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: $spacing-xs;
+  flex-shrink: 0;
+  min-width: 150px;
+}
+
+// Question Content
+.millionaire-question-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  margin-top: 90px; // Выравнивание подсказок с уровнем 300₽
+}
+
+.millionaire-prize-item {
+  background: $bg-light;
+  padding: $spacing-xs $spacing-md;
+  border-radius: 8px;
+  font-weight: bold;
+  text-align: center;
+  min-width: 150px;
+  white-space: nowrap;
+  transition: all $transition-fast;
+
+  &.active {
+    background: $primary-gradient;
+    color: $text-white;
+    transform: scale(1.1);
+    box-shadow: $shadow-md;
+  }
+
+  &.passed {
+    background: $secondary-color;
+    color: $text-white;
+  }
+
+  &.guaranteed {
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+    color: #8b6914;
+    border: 2px solid #ffd700;
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
+    font-weight: 900;
+    position: relative;
+
+    &::before {
+      content: '🛡️';
+      margin-right: 5px;
+    }
+
+    &.active {
+      background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+      color: #8b6914;
+      border: 3px solid #ffd700;
+      box-shadow: 0 4px 12px rgba(255, 215, 0, 0.6);
+    }
+
+    &.passed {
+      background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+      color: #8b6914;
+      border: 2px solid #ffd700;
+    }
+  }
+}
+
+// Кнопка "Начать заново" в блоке с призовыми суммами
+.millionaire-reset-btn {
+  padding: 12px 20px;
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: bold;
+  box-shadow: 0 3px 10px rgba(255, 107, 107, 0.3);
+  transition: all $transition-fast;
+  white-space: nowrap;
+  width: 100%;
+  margin-top: 15px;
+
+  @include hover-scale;
+
+  &:hover {
+    background: #ee5a6f;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Lifelines
+.millionaire-lifelines {
+  display: flex;
+  gap: $spacing-xs;
+  justify-content: center;
+  margin-bottom: $spacing-md;
+}
+
+.millionaire-lifeline-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 3px solid $primary-color;
+  background: $bg-white;
+  cursor: pointer;
+  font-size: 1.5em;
+  transition: all $transition-fast;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1;
+
+  @include flex-center;
+  @include hover-scale;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-color: $border-color;
+  }
+
+  // Уменьшаем шрифт для текста "50:50"
+  &[data-lifeline="50-50"] {
+    font-size: 0.85em;
+    font-weight: bold;
+  }
+}
+
+// Question Container
+.millionaire-question-container {
+  text-align: center;
+  padding: $spacing-md;
+}
+
+// Game Layout (для десктопа)
+.millionaire-game-layout {
+  display: flex;
+  gap: $spacing-lg;
+  align-items: flex-start;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.millionaire-question-number {
+  font-size: $font-size-xs;
+  color: $text-light;
+  margin-bottom: $spacing-md;
+}
+
+.millionaire-question-text {
+  font-size: $font-size-lg;
+  font-weight: bold;
+  margin-bottom: $spacing-xl;
+  color: $text-color;
+  line-height: 1.4;
+}
+
+// Answers
+.millionaire-answers-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-md;
+  margin-bottom: $spacing-lg;
+}
+
+.millionaire-answer-btn {
+  padding: 25px;
+  font-size: $font-size-sm;
+  border: 3px solid $primary-color;
+  border-radius: 15px;
+  background: $bg-white;
+  cursor: pointer;
+  transition: all $transition-fast;
+  font-weight: 500;
+  text-align: left;
+  position: relative;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.4;
+
+  @include hover-lift;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &.selected {
+    animation: blink 1.4s ease-in-out infinite;
+  }
+
+  &.correct {
+    background: $secondary-color;
+    color: $text-white;
+    border-color: $secondary-color;
+
+    @include pulse;
+  }
+
+  &.incorrect {
+    background: $error-color;
+    color: $text-white;
+    border-color: $error-color;
+
+    @include shake;
+  }
+
+  &.hidden {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+}
+
+// Lifeline Result
+.millionaire-lifeline-result {
+  margin-top: $spacing-md;
+  padding: $spacing-sm;
+  background: $bg-light-blue;
+  border-radius: $border-radius-small;
+  min-height: 50px;
+
+  &.show {
+    @include slide-in;
+  }
+}
+
+// Result Screen
+.millionaire-result-content {
+  text-align: center;
+  padding: 60px 20px;
+
+  h2 {
+    font-size: $font-size-xxl;
+    margin-bottom: $spacing-md;
+
+    &.won {
+      color: $secondary-color;
+    }
+
+    &.lost {
+      color: $error-color;
+    }
+  }
+
+  p {
+    font-size: $font-size-md;
+    margin-bottom: $spacing-lg;
+    color: $text-light;
+  }
+}
+
+.millionaire-final-score {
+  font-size: $font-size-xxxl;
+  font-weight: bold;
+  color: $primary-color;
+  margin: $spacing-lg 0;
+}
+

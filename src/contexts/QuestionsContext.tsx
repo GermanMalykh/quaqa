@@ -8,7 +8,10 @@ import type {
   Question, 
   LoadingStatus, 
   SheetStat,
-  XLSXLoadResult
+  XLSXLoadResult,
+  GameId,
+  GamesQuestionConfig,
+  GameQuestionConfig
 } from '../types'
 
 const QuestionsContext = createContext<QuestionsContextValue | null>(null)
@@ -29,6 +32,15 @@ export function QuestionsProvider({ children }: QuestionsProviderProps) {
   const [error, setError] = useState<Error | string | null>(null)
   const [sheetStats, setSheetStats] = useState<SheetStat[]>([])
   const [showFormatExample, setShowFormatExample] = useState(true)
+  const [gamesConfig, setGamesConfig] = useState<GamesQuestionConfig>({})
+
+  // Загрузка конфигурации игр при монтировании
+  useEffect(() => {
+    const savedConfig = Storage.loadGamesConfig()
+    if (savedConfig) {
+      setGamesConfig(savedConfig)
+    }
+  }, [])
 
   // Загрузка данных при монтировании
   useEffect(() => {
@@ -154,6 +166,34 @@ export function QuestionsProvider({ children }: QuestionsProviderProps) {
     setShowFormatExample(true)
   }, [])
 
+  const updateGameConfig = useCallback((gameId: GameId, config: GameQuestionConfig) => {
+    setGamesConfig(prev => {
+      const updated = { ...prev, [gameId]: config }
+      Storage.saveGamesConfig(updated)
+      return updated
+    })
+  }, [])
+
+  const getGameConfig = useCallback((gameId: GameId): GameQuestionConfig | null => {
+    return gamesConfig[gameId] || null
+  }, [gamesConfig])
+
+  const getGameTopics = useCallback((gameId: GameId): string[] => {
+    const config = gamesConfig[gameId]
+    if (!config) {
+      // Если конфигурации нет, используем общие выбранные темы
+      return selectedTopics
+    }
+    
+    if (config.source === 'common') {
+      // Используем общие выбранные темы
+      return selectedTopics
+    } else {
+      // Используем темы, выбранные для этой игры
+      return config.selectedTopics
+    }
+  }, [gamesConfig, selectedTopics])
+
   const value: QuestionsContextValue = {
     // State
     allQuestionsByTopic,
@@ -163,10 +203,14 @@ export function QuestionsProvider({ children }: QuestionsProviderProps) {
     error,
     sheetStats,
     showFormatExample,
+    gamesConfig,
     // Actions
     loadFromFile,
     toggleTopic,
     clearData,
+    updateGameConfig,
+    getGameConfig,
+    getGameTopics,
   }
 
   return (

@@ -17,14 +17,13 @@ function StatsBlock({ totalSeconds, questionSeconds }: StatsBlockProps) {
   const currentQuestionNumber = currentQuestionIndex + 1
 
   const questionTimeColor = useMemo(() => {
-    if (questionSeconds <= 10 && questionSeconds >= 0) {
-      return 'linear-gradient(135deg, #ee5a6f 0%, #c44569 100%)'
-    } else if (questionSeconds <= 30 && questionSeconds >= 0) {
-      return 'linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%)'
-    } else if (questionSeconds < 0) {
-      return 'linear-gradient(135deg, #c44569 0%, #8b2e4f 100%)'
+    // Красный цвет только когда превышен лимит (отрицательное значение)
+    // Используем тот же цвет, что и кнопка "Начать заново" (#ff6b6b)
+    if (questionSeconds < 0) {
+      return '#ff6b6b'
     }
-    return 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+    // По умолчанию белый (не задаем цвет, используется из CSS)
+    return undefined
   }, [questionSeconds])
 
   const displayQuestionTime = useMemo(() => 
@@ -36,17 +35,19 @@ function StatsBlock({ totalSeconds, questionSeconds }: StatsBlockProps) {
 
   return (
     <div className="stats">
-      <div className="stat-box stat-box-total-time">
-        <h3>Общее время</h3>
-        <div className="value">{formatTime(totalSeconds)}</div>
-      </div>
-      <div className="stat-box stat-box-question">
-        <h3>Вопрос</h3>
-        <div className="value">{currentQuestionNumber}/{totalQuestions}</div>
-      </div>
-      <div className="stat-box stat-box-question-time" style={{ background: questionTimeColor }}>
-        <h3>Время на вопрос</h3>
-        <div className="value">{displayQuestionTime}</div>
+      <div className="stat-box">
+        <div className="stat-item stat-box-total-time">
+          <h3>Общее время</h3>
+          <div className="value">{formatTime(totalSeconds)}</div>
+        </div>
+        <div className="stat-item stat-box-question">
+          <h3>Вопрос</h3>
+          <div className="value">{currentQuestionNumber}/{totalQuestions}</div>
+        </div>
+        <div className="stat-item stat-box-question-time">
+          <h3>Время на вопрос</h3>
+          <div className="value" style={questionTimeColor ? { color: questionTimeColor } : undefined}>{displayQuestionTime}</div>
+        </div>
       </div>
     </div>
   )

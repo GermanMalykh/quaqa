@@ -1,0 +1,67 @@
+@use './variables' as *;
+
+// Миксин для flexbox центрирования
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Миксин для кнопок
+@mixin button-base {
+  padding: $spacing-sm $spacing-xl;
+  font-size: $font-size-sm;
+  border: none;
+  border-radius: $border-radius-button;
+  cursor: pointer;
+  transition: all $transition-fast;
+  font-weight: bold;
+}
+
+// Миксин для карточек
+@mixin card {
+  background: $bg-white;
+  border-radius: $border-radius;
+  padding: $spacing-xl;
+  box-shadow: $shadow-lg;
+}
+
+// Миксин для анимаций
+@mixin fade-in {
+  animation: fadeIn $transition-normal;
+}
+
+@mixin slide-in {
+  animation: slideIn $transition-normal;
+}
+
+@mixin pulse {
+  animation: pulse $transition-normal;
+}
+
+@mixin shake {
+  animation: shake $transition-normal;
+}
+
+// Миксин для hover эффектов
+@mixin hover-lift {
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: $shadow-sm;
+  }
+}
+
+@mixin hover-scale {
+  &:hover:not(:disabled) {
+    transform: scale(1.05);
+    box-shadow: $shadow-md;
+  }
+}
+
+// Миксин для медиа-запросов
+@mixin mobile {
+  @media (max-width: $breakpoint-mobile) {
+    @content;
+  }
+}
+

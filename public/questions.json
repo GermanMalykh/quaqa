@@ -1,0 +1,348 @@
+[
+  {
+    "id": 1,
+    "text": "Что такое тест-кейс?",
+    "difficulty": 1,
+    "answers": [
+      {
+        "text": "Документ, описывающий шаги для проверки функциональности",
+        "isCorrect": true
+      },
+      {
+        "text": "Инструмент для автоматизации тестирования",
+        "isCorrect": false
+      },
+      {
+        "text": "База данных с багами",
+        "isCorrect": false
+      },
+      {
+        "text": "Язык программирования для тестирования",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "text": "Что означает аббревиатура API?",
+    "difficulty": 1,
+    "answers": [
+      {
+        "text": "Application Programming Interface",
+        "isCorrect": true
+      },
+      {
+        "text": "Automated Performance Integration",
+        "isCorrect": false
+      },
+      {
+        "text": "Advanced Protocol Implementation",
+        "isCorrect": false
+      },
+      {
+        "text": "Application Process Integration",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "text": "Что такое регрессионное тестирование?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Проверка того, что новые изменения не сломали существующий функционал",
+        "isCorrect": true
+      },
+      {
+        "text": "Тестирование только новых функций",
+        "isCorrect": false
+      },
+      {
+        "text": "Тестирование производительности",
+        "isCorrect": false
+      },
+      {
+        "text": "Автоматическое тестирование UI",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "text": "Что такое 'баг' в контексте тестирования?",
+    "difficulty": 1,
+    "answers": [
+      {
+        "text": "Ошибка или дефект в программном обеспечении",
+        "isCorrect": true
+      },
+      {
+        "text": "Тестовый сценарий",
+        "isCorrect": false
+      },
+      {
+        "text": "Инструмент для тестирования",
+        "isCorrect": false
+      },
+      {
+        "text": "Методология тестирования",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "text": "Что такое smoke testing?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Быстрая проверка основных функций приложения после сборки",
+        "isCorrect": true
+      },
+      {
+        "text": "Тестирование безопасности",
+        "isCorrect": false
+      },
+      {
+        "text": "Нагрузочное тестирование",
+        "isCorrect": false
+      },
+      {
+        "text": "Тестирование пользовательского интерфейса",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "text": "Что означает HTTP статус код 404?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Страница не найдена",
+        "isCorrect": true
+      },
+      {
+        "text": "Сервер недоступен",
+        "isCorrect": false
+      },
+      {
+        "text": "Ошибка авторизации",
+        "isCorrect": false
+      },
+      {
+        "text": "Внутренняя ошибка сервера",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "text": "Что такое Selenium?",
+    "difficulty": 3,
+    "answers": [
+      {
+        "text": "Фреймворк для автоматизации тестирования веб-приложений",
+        "isCorrect": true
+      },
+      {
+        "text": "Система управления багами",
+        "isCorrect": false
+      },
+      {
+        "text": "Методология тестирования",
+        "isCorrect": false
+      },
+      {
+        "text": "Язык программирования",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "text": "Что такое boundary value analysis?",
+    "difficulty": 3,
+    "answers": [
+      {
+        "text": "Техника тестирования граничных значений входных данных",
+        "isCorrect": true
+      },
+      {
+        "text": "Анализ производительности",
+        "isCorrect": false
+      },
+      {
+        "text": "Тестирование безопасности",
+        "isCorrect": false
+      },
+      {
+        "text": "Метод автоматизации",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "text": "Что такое Test-Driven Development (TDD)?",
+    "difficulty": 3,
+    "answers": [
+      {
+        "text": "Методология разработки, где тесты пишутся до написания кода",
+        "isCorrect": true
+      },
+      {
+        "text": "Тестирование только после разработки",
+        "isCorrect": false
+      },
+      {
+        "text": "Автоматизация тестирования",
+        "isCorrect": false
+      },
+      {
+        "text": "Ручное тестирование",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "text": "Что такое CI/CD?",
+    "difficulty": 3,
+    "answers": [
+      {
+        "text": "Continuous Integration / Continuous Deployment",
+        "isCorrect": true
+      },
+      {
+        "text": "Code Integration / Code Deployment",
+        "isCorrect": false
+      },
+      {
+        "text": "Component Integration / Component Development",
+        "isCorrect": false
+      },
+      {
+        "text": "Critical Issues / Critical Defects",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "text": "Что такое 'чек-лист' в тестировании?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Список проверок для систематического тестирования",
+        "isCorrect": true
+      },
+      {
+        "text": "Список багов",
+        "isCorrect": false
+      },
+      {
+        "text": "Инструмент автоматизации",
+        "isCorrect": false
+      },
+      {
+        "text": "Документация проекта",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "text": "Что такое 'приоритет бага'?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Важность бага для бизнеса и пользователей",
+        "isCorrect": true
+      },
+      {
+        "text": "Скорость исправления бага",
+        "isCorrect": false
+      },
+      {
+        "text": "Количество багов в системе",
+        "isCorrect": false
+      },
+      {
+        "text": "Сложность воспроизведения бага",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "text": "Что такое 'эквивалентное разбиение' (equivalence partitioning)?",
+    "difficulty": 4,
+    "answers": [
+      {
+        "text": "Техника разделения входных данных на группы с одинаковым поведением",
+        "isCorrect": true
+      },
+      {
+        "text": "Разделение тестов на модули",
+        "isCorrect": false
+      },
+      {
+        "text": "Классификация багов",
+        "isCorrect": false
+      },
+      {
+        "text": "Организация тестовой документации",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "text": "Что такое 'мок' (mock) в тестировании?",
+    "difficulty": 3,
+    "answers": [
+      {
+        "text": "Имитация объекта или сервиса для изоляции тестируемого компонента",
+        "isCorrect": true
+      },
+      {
+        "text": "Реальный объект для тестирования",
+        "isCorrect": false
+      },
+      {
+        "text": "Инструмент для UI тестирования",
+        "isCorrect": false
+      },
+      {
+        "text": "База данных для тестов",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "text": "Что такое 'покрытие кода' (code coverage)?",
+    "difficulty": 3,
+    "answers": [
+      {
+        "text": "Процент кода, который выполняется тестами",
+        "isCorrect": true
+      },
+      {
+        "text": "Количество тестов в проекте",
+        "isCorrect": false
+      },
+      {
+        "text": "Количество багов на строку кода",
+        "isCorrect": false
+      },
+      {
+        "text": "Процент исправленных багов",
+        "isCorrect": false
+      }
+    ]
+  }
+]
+

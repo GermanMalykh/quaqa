@@ -49,6 +49,24 @@ export const XLSXLoader = {
       return str.includes('объяснение') || str.includes('explanation') || str.includes('под капотом')
     })
     
+    // Опциональные колонки для игры "Миллионер"
+    const difficultyIndex = headerRow.findIndex(h => {
+      const str = String(h).toLowerCase()
+      return str.includes('сложность') || str.includes('difficulty') || str.includes('уровень')
+    })
+    const wrongAnswer1Index = headerRow.findIndex(h => {
+      const str = String(h).toLowerCase()
+      return str.includes('неправильный') && (str.includes('1') || str.includes('первый'))
+    })
+    const wrongAnswer2Index = headerRow.findIndex(h => {
+      const str = String(h).toLowerCase()
+      return str.includes('неправильный') && (str.includes('2') || str.includes('второй'))
+    })
+    const wrongAnswer3Index = headerRow.findIndex(h => {
+      const str = String(h).toLowerCase()
+      return str.includes('неправильный') && (str.includes('3') || str.includes('третий'))
+    })
+    
     if (questionIndex === -1 || answerIndex === -1 || explanationIndex === -1) {
       // Возвращаем пустой массив, ошибка будет обработана на уровне выше
       return []
@@ -65,15 +83,39 @@ export const XLSXLoader = {
       const answer = row[answerIndex] ? String(row[answerIndex]).trim() : ''
       const explanation = row[explanationIndex] ? String(row[explanationIndex]).trim() : ''
       
+      // Опциональные поля для "Миллионера"
+      const difficulty = difficultyIndex !== -1 && row[difficultyIndex]
+        ? parseInt(String(row[difficultyIndex]), 10)
+        : undefined
+      const wrongAnswer1 = wrongAnswer1Index !== -1 && row[wrongAnswer1Index]
+        ? String(row[wrongAnswer1Index]).trim()
+        : undefined
+      const wrongAnswer2 = wrongAnswer2Index !== -1 && row[wrongAnswer2Index]
+        ? String(row[wrongAnswer2Index]).trim()
+        : undefined
+      const wrongAnswer3 = wrongAnswer3Index !== -1 && row[wrongAnswer3Index]
+        ? String(row[wrongAnswer3Index]).trim()
+        : undefined
+      
       // Пропускаем пустые строки
       if (!question && !answer) continue
       
-      parsedQuestions.push({
+      const questionObj: Question = {
         category: sheetName,
         question: question,
         answer: answer,
         explanation: explanation || undefined
-      })
+      }
+      
+      // Добавляем опциональные поля, если они есть
+      if (difficulty && !isNaN(difficulty) && difficulty >= 1 && difficulty <= 4) {
+        questionObj.difficulty = difficulty
+      }
+      if (wrongAnswer1) questionObj.wrongAnswer1 = wrongAnswer1
+      if (wrongAnswer2) questionObj.wrongAnswer2 = wrongAnswer2
+      if (wrongAnswer3) questionObj.wrongAnswer3 = wrongAnswer3
+      
+      parsedQuestions.push(questionObj)
     }
     
     return parsedQuestions
